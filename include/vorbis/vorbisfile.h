@@ -52,9 +52,9 @@ typedef struct {
 static int _ov_header_fseek_wrap(FILE *f,ogg_int64_t off,int whence){
   if(f==NULL)return(-1);
 
-#ifdef __MINGW32__
+#ifdef __MINGW32__ && !NXDK
   return fseeko64(f,off,whence);
-#elif defined (_WIN32)
+#elif defined (_WIN32) && !NXDK
   return _fseeki64(f,off,whence);
 #else
   return fseek(f,off,whence);
